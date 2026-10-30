@@ -8,6 +8,9 @@
 - A small Node.js server (`server/server.js`) uses only Node's built-in
   features, with no npm packages. It serves the pages and keeps the AI
   API key hidden from the browser.
+- Links between pages and files are relative (`css/style.css`, `../../`),
+  never starting with `/`, so the site also works inside a sub-folder
+  (e.g. GitHub Pages at `/test/`).
 - Look ("Calm Studio"): teal accent, colours as variables in `css/style.css`,
   font Atkinson Hyperlegible from Google Fonts (falls back to system fonts).
 

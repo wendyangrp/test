@@ -250,7 +250,8 @@
     setBusy(true);
     var typing = addTypingBubble();
 
-    fetch("/api/persona-reply", {
+    // Relative, so it also works when the site lives in a sub-folder.
+    fetch("../../api/persona-reply", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ persona: persona, messages: messages }),
@@ -263,6 +264,10 @@
           })
           .then(function (data) {
             if (!res.ok || !data.reply) {
+              if (!data.error && (res.status === 404 || res.status === 405)) {
+                // No server here, e.g. a copy on GitHub Pages, which only serves files.
+                throw new Error("This copy of the site can't reach the AI, so the persona can't reply here. Open the full site (hosted on Render) to run interviews.");
+              }
               throw new Error(data.error || "Something went wrong. Please try again.");
             }
             return data.reply;
