@@ -35,67 +35,98 @@
           Describe the person you want to interview. The more detail you give,
           the more realistic their answers will be.
         </p>
+        <div class="examples">
+          <p class="examples-label">Or start from an example:</p>
+          <div class="chip-row" id="example-chips"></div>
+        </div>
+
         <form id="persona-form">
-          <div class="form-grid">
-            <div class="field">
-              <label for="p-name">Name</label>
-              <input id="p-name" name="name" required maxlength="80" />
+          <fieldset class="form-group">
+            <legend>Who they are</legend>
+            <div class="form-grid">
+              <div class="field">
+                <label for="p-name">Name</label>
+                <input id="p-name" name="name" required maxlength="80" />
+              </div>
+              <div class="field">
+                <label for="p-age">Age</label>
+                <input id="p-age" name="age" inputmode="numeric" maxlength="20" />
+              </div>
+              <div class="field wide">
+                <label for="p-occupation">Occupation</label>
+                <input id="p-occupation" name="occupation" maxlength="120" />
+              </div>
             </div>
-            <div class="field">
-              <label for="p-age">Age</label>
-              <input id="p-age" name="age" inputmode="numeric" maxlength="20" />
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Their world</legend>
+            <div class="form-grid">
+              <div class="field wide">
+                <label for="p-background">Background <span class="hint">(life situation, context)</span></label>
+                <textarea id="p-background" name="background" maxlength="1000"></textarea>
+              </div>
+              <div class="field">
+                <label for="p-goals">Goals <span class="hint">(what they want)</span></label>
+                <textarea id="p-goals" name="goals" maxlength="1000" rows="4"></textarea>
+              </div>
+              <div class="field">
+                <label for="p-frustrations">Frustrations <span class="hint">(what gets in the way)</span></label>
+                <textarea id="p-frustrations" name="frustrations" maxlength="1000" rows="4"></textarea>
+              </div>
+              <div class="field wide">
+                <label for="p-personality">Personality and way of talking <span class="hint">(optional)</span></label>
+                <textarea id="p-personality" name="personality" maxlength="600"></textarea>
+              </div>
             </div>
-            <div class="field wide">
-              <label for="p-occupation">Occupation</label>
-              <input id="p-occupation" name="occupation" maxlength="120" />
-            </div>
-            <div class="field wide">
-              <label for="p-background">Background <span class="hint">(life situation, context)</span></label>
-              <textarea id="p-background" name="background" maxlength="1000"></textarea>
-            </div>
-            <div class="field">
-              <label for="p-goals">Goals <span class="hint">(what they want)</span></label>
-              <textarea id="p-goals" name="goals" maxlength="1000" rows="4"></textarea>
-            </div>
-            <div class="field">
-              <label for="p-frustrations">Frustrations <span class="hint">(what gets in the way)</span></label>
-              <textarea id="p-frustrations" name="frustrations" maxlength="1000" rows="4"></textarea>
-            </div>
-            <div class="field wide">
-              <label for="p-personality">Personality and way of talking <span class="hint">(optional)</span></label>
-              <textarea id="p-personality" name="personality" maxlength="600"></textarea>
-            </div>
-          </div>
+          </fieldset>
+
           <div class="actions">
             <button type="submit" class="primary">Start interview</button>
-            <button type="button" id="fill-example">Fill example</button>
           </div>
         </form>
       </section>
 
       <!-- Step 2: interview -->
-      <section id="chat-step" class="panel" hidden>
-        <div class="persona-summary">
-          <h2 id="persona-title"></h2>
-          <p id="persona-subtitle"></p>
-        </div>
+      <section id="chat-step" class="interview" hidden>
+        <!-- Persona card: a sidebar on wider screens, a tap-to-open bar on phones -->
+        <details id="persona-card" class="persona-card panel">
+          <summary>
+            <span class="avatar" id="persona-initials" aria-hidden="true"></span>
+            <span class="persona-heading">
+              <span class="persona-name" id="persona-title"></span>
+              <span class="persona-sub" id="persona-subtitle"></span>
+            </span>
+          </summary>
+          <dl class="persona-facts" id="persona-facts"></dl>
+        </details>
 
-        <p id="error" class="error" role="alert" hidden></p>
+        <div class="chat-panel panel">
+          <p id="error" class="error" role="alert" hidden></p>
 
-        <ol id="chat-log" class="chat-log" aria-live="polite">
-          <li class="chat-empty">Ask your first question. Try open questions like “Tell me about the last time…”.</li>
-        </ol>
+          <ol id="chat-log" class="chat-log" aria-live="polite">
+            <li class="chat-empty">Ask your first question. Open questions like “Tell me about the last time…” get the richest answers.</li>
+          </ol>
 
-        <form id="chat-form" class="chat-form">
-          <textarea id="question" aria-label="Your question" placeholder="Type a question…" maxlength="1000" rows="2" required></textarea>
-          <button type="submit" class="primary" id="send-btn">Ask</button>
-        </form>
-        <p id="status" class="status"></p>
+          <div class="starters">
+            <p class="examples-label" id="starters-label">Question starters:</p>
+            <div class="chip-row" id="starter-chips" role="group" aria-labelledby="starters-label"></div>
+          </div>
 
-        <div class="actions">
-          <button type="button" id="copy-transcript">Copy transcript</button>
-          <button type="button" id="edit-persona">Edit persona</button>
-          <button type="button" id="new-interview">New interview</button>
+          <form id="chat-form" class="chat-form">
+            <textarea id="question" aria-label="Your question" aria-describedby="question-hint" placeholder="Type a question…" maxlength="1000" rows="2" required></textarea>
+            <button type="submit" class="primary" id="send-btn">Ask</button>
+          </form>
+          <p id="question-hint" class="question-hint" hidden>
+            That's a yes/no question. Try starting with “how” or “tell me about” to get a fuller answer.
+          </p>
+          <p id="status" class="status"></p>
+
+          <div class="actions">
+            <button type="button" id="copy-transcript">Copy transcript</button>
+            <button type="button" id="edit-persona">Edit persona</button>
+            <button type="button" id="new-interview">New interview</button>
+          </div>
         </div>
       </section>
     </main>

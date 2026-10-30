@@ -29,6 +29,8 @@
 
 - [x] Portal home page with tool list, responsive layout, light/dark theme toggle
 - [x] Tool 1: Persona Interview (set up a persona, interview it, AI replies in character)
+- [x] Tool 1 design: example personas, grouped form, persona card, question starters, yes/no hint
+- [ ] Tool 1 finish screen: interview summary and Says / Thinks / Does / Feels notes
 - [x] Hosting setup: Render config (`render.yaml`) and deploy steps in README
 - [ ] Go live: owner creates the Render service and sets the AI spending limit
 

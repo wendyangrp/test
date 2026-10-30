@@ -232,20 +232,160 @@ textarea {
   margin-top: 20px;
 }
 
-/* ---------- Chat ---------- */
-.persona-summary {
-  margin-bottom: 16px;
+.form-group {
+  border: 0;
+  padding: 0;
+  margin: 0 0 24px;
+  min-width: 0;
 }
 
-.persona-summary h2 {
-  margin: 0 0 4px;
+.form-group legend {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0;
+  margin-bottom: 12px;
 }
 
-.persona-summary p {
-  margin: 0;
+/* ---------- Chips (examples, question starters) ---------- */
+.examples {
+  margin-bottom: 24px;
+}
+
+.examples-label {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
   color: var(--muted);
 }
 
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button.chip {
+  min-height: 36px;
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  background: var(--bg);
+}
+
+/* ---------- Interview layout ---------- */
+.interview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.panel.persona-card {
+  padding: 0;
+}
+
+.persona-card summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.persona-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.persona-card summary::after {
+  content: "▾";
+  margin-left: auto;
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+
+.persona-card[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.avatar {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.persona-heading {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.persona-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.persona-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.persona-facts {
+  margin: 0;
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.persona-facts dt {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 12px;
+}
+
+.persona-facts dd {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.chat-panel {
+  min-width: 0;
+}
+
+.starters {
+  margin-bottom: 12px;
+}
+
+/* On phones, starters scroll sideways in one row instead of filling the screen. */
+@media (max-width: 599px) {
+  .starters .chip-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 -20px;
+    padding: 0 20px 4px;
+    scrollbar-width: none;
+  }
+
+  .starters .chip {
+    flex: none;
+  }
+}
+
+.question-hint {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+}
+
+/* ---------- Chat ---------- */
 .chat-log {
   display: flex;
   flex-direction: column;
@@ -297,9 +437,46 @@ textarea {
   border-bottom-left-radius: 4px;
 }
 
-.bubble.typing {
-  font-style: italic;
-  color: var(--muted);
+.dots {
+  display: inline-flex;
+  gap: 4px;
+  padding: 6px 0 2px;
+}
+
+.dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: dot-bounce 1.2s infinite ease-in-out;
+}
+
+.dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes dot-bounce {
+  0%,
+  60%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dots span {
+    animation: none;
+    opacity: 0.6;
+  }
 }
 
 .chat-form {
@@ -356,6 +533,18 @@ textarea {
 
   .bubble {
     max-width: 75%;
+  }
+}
+
+/* ---------- Interview sidebar (wide tablets and up) ---------- */
+@media (min-width: 900px) {
+  .interview {
+    grid-template-columns: 300px minmax(0, 1fr);
+  }
+
+  .persona-card {
+    position: sticky;
+    top: 16px;
   }
 }
 
