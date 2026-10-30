@@ -609,6 +609,11 @@ button.chip {
   margin: 0 0 12px;
 }
 
+.error a {
+  color: inherit;
+  font-weight: 700;
+}
+
 .status {
   color: var(--muted);
   font-size: 0.9rem;

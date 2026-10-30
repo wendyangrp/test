@@ -4,6 +4,8 @@
 (function () {
   var MAX_QUESTIONS = 30; // keep in sync with MAX_MESSAGES in server/server.js
   var WIDE_SCREEN = "(min-width: 900px)"; // keep in sync with the .interview layout in css/style.css
+  // Where the full site (with the AI server) runs. Shown on copies without a server, like GitHub Pages.
+  var FULL_SITE_URL = "https://empathy-toolkit.onrender.com/tools/persona-interview/";
 
   var EXAMPLES = [
     {
@@ -266,7 +268,9 @@
             if (!res.ok || !data.reply) {
               if (!data.error && (res.status === 404 || res.status === 405)) {
                 // No server here, e.g. a copy on GitHub Pages, which only serves files.
-                throw new Error("This copy of the site can't reach the AI, so the persona can't reply here. Open the full site (hosted on Render) to run interviews.");
+                var noServer = new Error("This copy of the site can't reach the AI, so the persona can't reply here.");
+                noServer.link = { href: FULL_SITE_URL, text: "Open the full site to run interviews" };
+                throw noServer;
               }
               throw new Error(data.error || "Something went wrong. Please try again.");
             }
@@ -286,7 +290,7 @@
         if (!messages.length) resetChat();
         $("question").value = text;
         updateHint();
-        showError(err.message === "Failed to fetch" ? "Could not reach the server. Check your connection and try again." : err.message);
+        showError(err.message === "Failed to fetch" ? "Could not reach the server. Check your connection and try again." : err.message, err.link);
       })
       .finally(function () {
         setBusy(false);
@@ -342,9 +346,17 @@
     $("status").textContent = text;
   }
 
-  function showError(text) {
+  // link (optional): { href, text } added after the message.
+  function showError(text, link) {
     var el = $("error");
     el.textContent = text;
+    if (link) {
+      var a = document.createElement("a");
+      a.href = link.href;
+      a.textContent = link.text;
+      el.appendChild(document.createTextNode(" "));
+      el.appendChild(a);
+    }
     el.hidden = false;
   }
 
