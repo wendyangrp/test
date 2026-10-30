@@ -24,6 +24,12 @@
 2. Users can toggle between a light and a dark theme. The default is the
    light theme.
 
+## Feature Plan
+
+- [x] Portal home page with tool list, responsive layout, light/dark theme toggle
+- [x] Tool 1: Persona Interview (set up a persona, interview it, AI replies in character)
+- [ ] Hosting: choose a host and a monthly spending limit (ask first)
+
 ## Rules for Claude
 
 - Explain technical terms in plain language.
