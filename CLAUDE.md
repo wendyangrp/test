@@ -17,6 +17,7 @@
 - `tools/<tool-name>/`: one folder per tool (its page and script)
 - `server/server.js`: static file server and the `/api/...` endpoints
 - `.env.example`: settings the server needs (the real `.env` is never committed)
+- `render.yaml`: hosting setup for Render
 
 ## Key Requirements
 
@@ -28,7 +29,8 @@
 
 - [x] Portal home page with tool list, responsive layout, light/dark theme toggle
 - [x] Tool 1: Persona Interview (set up a persona, interview it, AI replies in character)
-- [ ] Hosting: choose a host and a monthly spending limit (ask first)
+- [x] Hosting setup: Render config (`render.yaml`) and deploy steps in README
+- [ ] Go live: owner creates the Render service and sets the AI spending limit
 
 ## Rules for Claude
 

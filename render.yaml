@@ -1,0 +1,21 @@
+# Render Blueprint: tells Render how to run this site.
+# See README.md ("Put it online") for the setup steps.
+services:
+  - type: web
+    name: empathy-toolkit
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Render sits in front of the server, so read the visitor's address
+      # from the X-Forwarded-For header for the per-visitor rate limit.
+      - key: TRUST_PROXY
+        value: "true"
+      # Secret: Render asks for this during setup. It is never stored in git.
+      - key: ANTHROPIC_API_KEY
+        sync: false
