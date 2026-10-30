@@ -11,7 +11,8 @@
 
   function updateButton(button) {
     var dark = currentTheme() === "dark";
-    button.textContent = dark ? "☀️ Light theme" : "🌙 Dark theme";
+    // The moon/sun icons are swapped by CSS; only the label changes here.
+    button.querySelector(".theme-label").textContent = dark ? "Light theme" : "Dark theme";
     button.setAttribute("aria-pressed", String(dark));
   }
 

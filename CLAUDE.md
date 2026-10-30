@@ -8,6 +8,8 @@
 - A small Node.js server (`server/server.js`) uses only Node's built-in
   features, with no npm packages. It serves the pages and keeps the AI
   API key hidden from the browser.
+- Look ("Calm Studio"): teal accent, colours as variables in `css/style.css`,
+  font Atkinson Hyperlegible from Google Fonts (falls back to system fonts).
 
 ## Project Structure
 
@@ -30,6 +32,7 @@
 - [x] Portal home page with tool list, responsive layout, light/dark theme toggle
 - [x] Tool 1: Persona Interview (set up a persona, interview it, AI replies in character)
 - [x] Tool 1 design: example personas, grouped form, persona card, question starters, yes/no hint
+- [x] Visual design: "Calm Studio" direction applied to the portal and Tool 1
 - [ ] Tool 1 finish screen: interview summary and Says / Thinks / Does / Feels notes
 - [x] Hosting setup: Render config (`render.yaml`) and deploy steps in README
 - [ ] Go live: owner creates the Render service and sets the AI spending limit

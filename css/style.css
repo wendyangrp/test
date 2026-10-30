@@ -1,32 +1,36 @@
 /* ---------- Theme colours ---------- */
 :root {
-  --bg: #f7f7f5;
+  --bg: #f3f6f6;
   --surface: #ffffff;
-  --text: #1d1d1f;
-  --muted: #5c5f66;
-  --border: #dcdde0;
-  --accent: #2f5bd3;
+  --text: #15292b;
+  --muted: #4a5b5d;
+  --border: #d5dfdf;
+  --accent: #0f766e;
   --accent-text: #ffffff;
-  --bubble-me: #2f5bd3;
+  --accent-ink: #0f766e;
+  --tag: #e3ecec;
+  --bubble-me: #0f766e;
   --bubble-me-text: #ffffff;
-  --bubble-them: #eceef2;
+  --bubble-them: #e3ecec;
   --error-bg: #fdecec;
   --error-text: #9b1c1c;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow: none;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #121316;
-  --surface: #1c1e22;
-  --text: #ececee;
-  --muted: #a3a6ad;
-  --border: #33363c;
-  --accent: #7d9cff;
-  --accent-text: #0f1320;
-  --bubble-me: #3a5bc4;
+  --bg: #0e1718;
+  --surface: #162224;
+  --text: #e4eeee;
+  --muted: #a3b6b7;
+  --border: #2a3a3c;
+  --accent: #2dd4bf;
+  --accent-text: #062221;
+  --accent-ink: #5eead4;
+  --tag: #22322f;
+  --bubble-me: #14796f;
   --bubble-me-text: #ffffff;
-  --bubble-them: #2a2d33;
+  --bubble-them: #22322f;
   --error-bg: #3b1d1d;
   --error-text: #ffb4b4;
   --shadow: none;
@@ -48,13 +52,13 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 1rem;
-  line-height: 1.55;
+  font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 h1,
@@ -65,7 +69,7 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 0 16px;
 }
@@ -81,14 +85,44 @@ h3 {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  min-height: 60px;
+  min-height: 68px;
 }
 
 .site-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--text);
   text-decoration: none;
+}
+
+.logo {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+/* Theme toggle: moon in light theme, sun in dark theme */
+.theme-toggle {
+  background: var(--bg);
+  font-size: 0.95rem;
+}
+
+.theme-toggle .icon-sun,
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: inline;
 }
 
 /* ---------- Buttons ---------- */
@@ -96,8 +130,8 @@ button,
 .button {
   font: inherit;
   min-height: 44px;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
@@ -127,6 +161,7 @@ button.primary,
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-text);
+  font-weight: 700;
 }
 
 button:disabled {
@@ -135,58 +170,134 @@ button:disabled {
 }
 
 /* ---------- Page content ---------- */
-main {
-  padding: 24px 0 48px;
+/* main.container so this beats .container's side padding rule */
+main.container {
+  padding-top: 32px;
+  padding-bottom: 56px;
 }
 
 .intro {
-  max-width: 700px;
+  max-width: 660px;
 }
 
 .intro p {
   color: var(--muted);
 }
 
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.hero h1 {
+  margin: 0 0 16px;
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  line-height: 1.15;
+}
+
+.hero p {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.section-title {
+  margin: 48px 0 20px;
+  font-size: 1.5rem;
+}
+
 /* ---------- Tool cards (portal) ---------- */
 .tool-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 24px;
   padding: 0;
-  margin: 24px 0 0;
+  margin: 0;
   list-style: none;
 }
 
 .tool-card {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   height: 100%;
-  padding: 20px;
+  padding: 24px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
+  border-radius: 20px;
 }
 
 .tool-card h3 {
   margin: 0 0 8px;
+  font-size: 1.35rem;
 }
 
 .tool-card p {
-  margin: 0 0 16px;
+  margin: 0;
   color: var(--muted);
-  flex: 1;
 }
 
 .tool-card .button {
   align-self: flex-start;
+  min-height: 48px;
+  padding: 0 24px;
+}
+
+/* Small chat preview inside a tool card (decoration only) */
+.card-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--bg);
+}
+
+.preview-bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.preview-bubble.me {
+  align-self: flex-end;
+  background: var(--bubble-me);
+  color: var(--bubble-me-text);
+  border-radius: 16px 16px 4px 16px;
+}
+
+.preview-bubble.them {
+  align-self: flex-start;
+  background: var(--bubble-them);
+  color: var(--text);
+  border-radius: 16px 16px 16px 4px;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--tag);
+  font-size: 0.8rem;
 }
 
 /* ---------- Forms ---------- */
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 20px;
   box-shadow: var(--shadow);
 }
@@ -215,7 +326,7 @@ textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--bg);
   color: var(--text);
 }
@@ -511,12 +622,13 @@ button.chip {
 
 /* ---------- Tablet ---------- */
 @media (min-width: 600px) {
-  main {
-    padding: 40px 0 64px;
+  main.container {
+    padding-top: 56px;
+    padding-bottom: 72px;
   }
 
-  .tool-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .tool-card {
+    padding: 28px;
   }
 
   .form-grid {
@@ -536,6 +648,13 @@ button.chip {
   }
 }
 
+/* ---------- Two tool cards per row (cards need room for the chat preview) ---------- */
+@media (min-width: 760px) {
+  .tool-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* ---------- Interview sidebar (wide tablets and up) ---------- */
 @media (min-width: 900px) {
   .interview {
@@ -550,10 +669,6 @@ button.chip {
 
 /* ---------- Desktop ---------- */
 @media (min-width: 1000px) {
-  .tool-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .bubble {
     max-width: 65%;
   }
