@@ -1,0 +1,11 @@
+{
+  "name": "empathy-toolkit",
+  "private": true,
+  "description": "Small web tools for the empathy stage of design thinking.",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "start": "node server/server.js"
+  }
+}

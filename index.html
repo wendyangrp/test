@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Empathy Toolkit</title>
+    <meta name="description" content="Small web tools for practising the empathy stage of design thinking." />
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/theme.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="site-title" href="/">Empathy Toolkit</a>
+        <button id="theme-toggle" type="button">🌙 Dark theme</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="intro">
+        <h1>Tools for the empathy stage of design thinking</h1>
+        <p>
+          The empathy stage is about understanding the people you design for:
+          what they do, think, feel and struggle with. These small tools help
+          you practise that before (and alongside) talking to real users.
+        </p>
+      </section>
+
+      <h2>Tools</h2>
+      <ul class="tool-grid">
+        <li>
+          <article class="tool-card">
+            <h3>Persona Interview</h3>
+            <p>
+              Describe a persona, then interview them. The persona answers in
+              character, so you can practise asking good, open questions.
+            </p>
+            <a class="button primary" href="/tools/persona-interview/">Open tool</a>
+          </article>
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

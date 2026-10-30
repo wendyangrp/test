@@ -5,16 +5,18 @@
 - Plain HTML, CSS, and JavaScript only.
 - No frameworks or libraries (no React, Vue, Tailwind, etc.).
 - No build step: files are opened or served exactly as written.
+- A small Node.js server (`server/server.js`) uses only Node's built-in
+  features, with no npm packages. It serves the pages and keeps the AI
+  API key hidden from the browser.
 
 ## Project Structure
 
-The project is nearly empty for now.
-
-- `README.md` – project readme
-- `CLAUDE.md` – this file
-
-Add new pages, styles, and scripts at the top level until the project
-grows enough to need folders. Update this section when the structure changes.
+- `index.html`: portal home page that lists the tools
+- `css/style.css`: shared styles and the light/dark theme colours
+- `js/theme.js`: theme toggle used on every page
+- `tools/<tool-name>/`: one folder per tool (its page and script)
+- `server/server.js`: static file server and the `/api/...` endpoints
+- `.env.example`: settings the server needs (the real `.env` is never committed)
 
 ## Key Requirements
 
